@@ -7,7 +7,7 @@ var debug = false
 function checkAppStatus() {
 	console.log("Fetching latest app status...")
 
-    // invoke ruby script to grab latest app status
+	// invoke ruby script to grab latest app status
 	var exec = require("child_process").exec;
 	exec('ruby get-app-status.rb', function (err, stdout, stderr) {
 		if (stdout) {
