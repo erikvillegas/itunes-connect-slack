@@ -1,7 +1,7 @@
 itunes-connect-slack
 --------------------
 
-These scripts fetch app info directly from iTunes Connect and posts changes in Slack as a bot. Since there is no fancy webhook APIs that iTC provides, we resort to polling with the help of Fastlane's [Spaceship](https://github.com/fastlane/fastlane/tree/master/spaceship).
+These scripts fetch app info directly from iTunes Connect and posts changes in Slack as a bot. Since iTC doesn't provide any fancy webhooks, these scripts use polling with the help of Fastlane's [Spaceship](https://github.com/fastlane/fastlane/tree/master/spaceship).
 
 ![](https://raw.githubusercontent.com/erikvillegas/itunes-connect-slack/master/example.png)
 
