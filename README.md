@@ -24,6 +24,11 @@ npm install dirty --save # quick and dirty key/value store
 npm install moment --save # simple date parsing/formatting
 ```
 
+### Running the scripts
+```bash
+node poll-itc.js
+```
+
 ### Channel info
 Set the specific channel you'd like the bot to post to in `post-update.js`. By default, it posts to `#ios-app-updates`.
 
