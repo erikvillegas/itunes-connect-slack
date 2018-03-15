@@ -1,7 +1,7 @@
 itunes-connect-slack
 --------------------
 
-These scripts fetch app info directly from iTunes Connect and posts changes in Slack as a bot. Since iTC doesn't provide any fancy webhooks, these scripts use polling with the help of Fastlane's [Spaceship](https://github.com/fastlane/fastlane/tree/master/spaceship).
+These scripts fetch app info directly from iTunes Connect and posts changes in Slack as a bot. Since iTC doesn't provide event webhooks, these scripts use polling with the help of Fastlane's [Spaceship](https://github.com/fastlane/fastlane/tree/master/spaceship).
 
 ![](https://raw.githubusercontent.com/erikvillegas/itunes-connect-slack/master/example.png)
 
@@ -18,15 +18,16 @@ export bundle_id="com.best.app" # The bundle ID of the app you want these script
 
 ### Install node modules
 ```bash
-sudo gem install fastlane # Spaceship is bundled with Fastlane tools
-npm install @slack/client --save # Slack's node.js SDK
-npm install dirty --save # quick and dirty key/value store
-npm install moment --save # simple date parsing/formatting
+sudo gem install fastlane
+npm install @slack/client@3.16.0 --save
+npm install dirty --save
+npm install moment --save
 ```
 
-### Running the scripts
+### Store your iTunes Connect password
+You can use Fastlane's [CredentialsManager](https://github.com/fastlane/fastlane/tree/master/credentials_manager) to store your password. Enter this command and it will prompt you for your password:
 ```bash
-node poll-itc.js
+fastlane fastlane-credentials add --username itc_username@example.com
 ```
 
 ### Channel info
@@ -34,6 +35,16 @@ Set the specific channel you'd like the bot to post to in `post-update.js`. By d
 
 ### Polling interval
 In `poll-itc.js`, set the `pollIntervalSeconds` value to whatever you like.
+
+### Running the scripts
+```bash
+node poll-itc.js
+```
+
+Or you can use the [forever](https://github.com/foreverjs/forever) tool to keep it up indefinitely:
+```base
+forever start poll-itc.js
+```
 
 # Files
 

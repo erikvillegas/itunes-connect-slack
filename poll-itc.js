@@ -12,6 +12,7 @@ function checkAppStatus() {
 	exec('ruby get-app-status.rb', function (err, stdout, stderr) {
 		if (stdout) {
 			// compare new app info with last one (from database)
+			console.log(stdout)
 			var versions = JSON.parse(stdout);
 
 			// use the live version if edit version is unavailable
