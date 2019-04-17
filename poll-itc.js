@@ -45,7 +45,7 @@ function checkAppStatus() {
 }
 
 if(!pollIntervalSeconds) {
-	pollIntervalSeconds = 60 * 2
+	pollIntervalSeconds = 60 * 2;
 }
 
 setInterval(checkAppStatus, pollIntervalSeconds * 1000);

@@ -16,7 +16,7 @@ function postToSlack(appInfo, submissionStartDate) {
 		channel = '#ios-app-updates';
 	}
 
-	client.chat.postMessage(process.env.SLACK_CHANNEL_NAME, message, params, function(err, res) {
+	client.chat.postMessage(channel, message, params, function(err, res) {
 	    if (err) {
 	        console.log('Error:', err);
 	    }

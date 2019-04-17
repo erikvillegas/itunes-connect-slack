@@ -12,7 +12,7 @@ if (!itc_username || !bundle_id)
 end
 
 
-if (!itc_password)
+if (itc_password)
  Spaceship::Tunes.login(itc_username,itc_password)
 else
  Spaceship::Tunes.login(itc_username)
