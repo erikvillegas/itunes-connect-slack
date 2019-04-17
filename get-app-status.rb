@@ -2,15 +2,22 @@ require 'spaceship'
 require 'json'
 
 # Constants
-itc_username = ENV["itc_username"]
-bundle_id = ENV["bundle_id"]
+itc_username = ENV['itc_username']
+itc_password = ENV['itc_password']
+bundle_id = ENV['bundle_id']
 
 if (!itc_username || !bundle_id)
 	puts "did not find username and bundle id"
 	exit
 end
 
-Spaceship::Tunes.login(itc_username)
+
+if (!itc_password)
+ Spaceship::Tunes.login(itc_username,itc_password)
+else
+ Spaceship::Tunes.login(itc_username)
+end
+
 app = Spaceship::Tunes::Application.find(bundle_id)
 editVersionInfo = app.edit_version
 liveVersionInfo = app.live_version
