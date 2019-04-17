@@ -1,8 +1,8 @@
 var poster = require('./post-update.js');
 var dirty = require('dirty');
 var db = dirty('kvstore.db');
-var pollIntervalSeconds = 120
 var debug = false
+var pollIntervalSeconds = process.env.POLL_TIME
 
 function checkAppStatus() {
 	console.log("Fetching latest app status...")
@@ -39,8 +39,13 @@ function checkAppStatus() {
 		}
 		else {
 			console.log("There was a problem fetching the status of the app!");
+			console.log(stderr)
 		}
 	});
+}
+
+if(!pollIntervalSeconds) {
+	pollIntervalSeconds = 60 * 2;
 }
 
 setInterval(checkAppStatus, pollIntervalSeconds * 1000);
