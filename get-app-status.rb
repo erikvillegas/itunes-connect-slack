@@ -1,4 +1,4 @@
-require 'Spaceship'
+require 'spaceship'
 require 'json'
 
 # Constants
