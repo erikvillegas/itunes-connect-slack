@@ -15,33 +15,42 @@ function checkAppStatus() {
 			console.log(stdout)
 			var versions = JSON.parse(stdout);
 
-			// use the live version if edit version is unavailable
-			var currentAppInfo = versions["editVersion"] ? versions["editVersion"] : versions["liveVersion"];
-			var lastAppInfo = db.get('appInfo');
-
-			if (!lastAppInfo || lastAppInfo.status != currentAppInfo.status || debug) {
-	    		poster.slack(currentAppInfo, db.get('submissionStart'));
-
-	    		// store submission start time
-		    	if (currentAppInfo.status == "Waiting For Review") {
-					db.set('submissionStart', new Date());
-		    	}
-	    	}
-	    	else if (currentAppInfo) {
-	    		console.log(`Current status \"${currentAppInfo.status}\" matches previous status`);
-	    	}
-	    	else {
-	    		console.log("Could not fetch app status");
-	    	}
-
-	    	// store latest app info in database
-	    	db.set('appInfo', currentAppInfo);
+			for(let version of versions) {
+  				_checkAppStatus(version);
+			}			
 		}
 		else {
 			console.log("There was a problem fetching the status of the app!");
-			console.log(stderr)
+			console.log(stderr);
 		}
 	});
+}
+
+function _checkAppStatus(version) {
+	// use the live version if edit version is unavailable
+	var currentAppInfo = version["editVersion"] ? version["editVersion"] : version["liveVersion"];
+
+	var appInfoKey = 'appInfo-' + currentAppInfo.appId;
+	var submissionStartkey = 'submissionStart' + currentAppInfo.appId;
+
+	var lastAppInfo = db.get(appInfoKey);
+	if (!lastAppInfo || lastAppInfo.status != currentAppInfo.status || debug) {
+		poster.slack(currentAppInfo, db.get(submissionStartkey));
+
+	    // store submission start time`
+		if (currentAppInfo.status == "Waiting For Review") {
+			db.set(submissionStartkey, new Date());
+		}
+	}
+	else if (currentAppInfo) {
+		console.log(`Current status \"${currentAppInfo.status}\" matches previous status. AppName: \"${currentAppInfo.name}\"`);
+	}
+	else {
+		console.log("Could not fetch app status");
+	}
+
+	// store latest app info in database
+	db.set(appInfoKey, currentAppInfo);
 }
 
 if(!pollIntervalSeconds) {
