@@ -35,6 +35,7 @@ end
 # Constants
 itc_username = ENV['itc_username']
 itc_password = ENV['itc_password']
+itc_team_id = ENV['itc_team_id']
 bundle_id = ENV['bundle_id']
 
 if (!itc_username)
@@ -48,6 +49,9 @@ else
  Spaceship::Tunes.login(itc_username)
 end
 
+if (itc_team_id)
+	Spaceship::Tunes.client.team_id = itc_team_id
+end
 # all json data
 versions = [] 
 
