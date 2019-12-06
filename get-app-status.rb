@@ -35,7 +35,8 @@ end
 # Constants
 itc_username = ENV['itc_username']
 itc_password = ENV['itc_password']
-itc_team_id = ENV['itc_team_id']
+#split team_id
+itc_team_id_array = ENV['itc_team_id'].to_s.split(",")
 bundle_id = ENV['bundle_id']
 
 if (!itc_username)
@@ -48,26 +49,32 @@ if (itc_password)
 else
  Spaceship::Tunes.login(itc_username)
 end
-
-if (itc_team_id)
-	Spaceship::Tunes.client.team_id = itc_team_id
-end
 # all json data
 versions = [] 
 
 # all apps
 apps = []
+#add for the team_ids
+#test if itc_team doesnt exists
 
-if (bundle_id)
-	app = Spaceship::Tunes::Application.find(bundle_id)
-	apps.push(app)
-else 
-	apps = Spaceship::Tunes::Application.all
-end
+if(itc_team_id_array)
+	for itc_team_id in itc_team_id_array
+		if (itc_team_id)
+			Spaceship::Tunes.client.team_id = itc_team_id
+		end
 
-for app in apps do
-  version = getVersionInfo(app)
-  versions.push(version)
+
+		if (bundle_id)
+			app = Spaceship::Tunes::Application.find(bundle_id)
+			apps.push(app)
+		else 
+			apps = Spaceship::Tunes::Application.all
+		end
+		for app in apps do
+		  version = getVersionInfo(app)
+		  versions.push(version)
+		end
+	end
 end
 
 
