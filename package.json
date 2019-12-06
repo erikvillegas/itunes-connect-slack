@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/erikvillegas/itunes-connect-slack#readme",
   "dependencies": {
-    "@slack/client": "^3.16.0",
+    "@slack/client": "3.16.0",
     "dirty": "^1.1.0",
     "moment": "^2.24.0"
   }
