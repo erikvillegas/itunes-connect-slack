@@ -57,5 +57,5 @@ if(!pollIntervalSeconds) {
 	pollIntervalSeconds = 60 * 2;
 }
 
-// setInterval(checkAppStatus, pollIntervalSeconds * 1000);
+setInterval(checkAppStatus, pollIntervalSeconds * 1000);
 checkAppStatus();
