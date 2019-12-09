@@ -13,7 +13,7 @@ These scripts read specific values from the bash environment. Be sure to set the
 ```bash
 export BOT_API_TOKEN="xoxb-asdfasdfasfasdfasdfsd" # The API Token for your bot, provided by Slack
 export itc_username="email@email.com" # The email you use to log into iTunes Connect
-export itc_team_id=77416800 #specify itunes team id if user has an access to multiple ones
+export itc_team_id=77416800,77416801 # specify itunes team ids if user has an access to multiple ones (comma separated)
 export bundle_id="com.best.app" # The bundle ID of the app you want these scripts to check
 ```
 
