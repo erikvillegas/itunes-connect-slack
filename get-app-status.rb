@@ -74,7 +74,7 @@ versions = []
 #add for the team_ids
 #test if itc_team doesnt exists
 
-if(itc_team_id_array)
+unless(itc_team_id_array.length.zero?)
 	for itc_team_id in itc_team_id_array
 		if (itc_team_id)
 			Spaceship::Tunes.client.team_id = itc_team_id
